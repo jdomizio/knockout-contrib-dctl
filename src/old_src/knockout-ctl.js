@@ -1,17 +1,10 @@
 /**
  * Knockout Component Template Loader (knockout-ctl)
  */
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define('knockout-ctl', ['knockout'], factory);
-    } else {
-        if(typeof root.ko === 'undefined') {
-            throw new Error('knockoutjs is required for knockout-ctl.');
-        }
-        root.koComponentTemplateLoader = factory(root.ko);
-    }
-}(this, function (ko) {
+define(function(require) {
     'use strict';
+
+    var ko = require('knockout');
 
     /** Get Existing Knockout stuff */
     var componentBinding = ko.bindingHandlers['component'],
@@ -25,7 +18,7 @@
      * @returns {Function}
      */
     function createValueAccessor(obj) {
-        return function () {
+        return function() {
             return obj;
         };
     }
@@ -48,10 +41,10 @@
                 }
 
                 subComponent = loader.getSubComponent(name, params);
-                if (subComponent) {
+                if(subComponent) {
                     name = name + '!' + subComponent;
                 }
-                return componentBinding.init(element, createValueAccessor({
+                componentBinding.init(element, createValueAccessor({
                     name: name,
                     params: params
                 }), allBindings, deprecated, bindingContext);
@@ -68,7 +61,7 @@
             if (config.subComponents) {
 
                 // Register a dummy component so KO won't barf
-                register(componentName, {viewModel: {}, template: ''});
+                register(componentName, { viewModel: {}, template: ''});
 
                 // Register subComponent discriminator for this component
                 loader.registerDiscriminator(componentName, config.getSubComponent);
@@ -78,7 +71,7 @@
 
                     // We can optionally provide one viewModel definition, or provide one for
                     // each subcomponent
-                    if (typeof value.viewModel === 'undefined' && config.viewModel) {
+                    if(typeof value.viewModel === 'undefined' && config.viewModel) {
                         value.viewModel = config.viewModel;
                     }
                     register(componentName + '!' + prop, value);
@@ -103,9 +96,8 @@
      * @param params - The parameters being passed to the component
      * @returns {*} - A valid component configuration: { viewModel, template }
      */
-    loader.getSubComponent = function (componentName, params) {
-        var discriminator = this.discriminators[componentName];
-        return discriminator && discriminator(params);
+    loader.getSubComponent = function(componentName, params) {
+        return this.discriminators[componentName](params);
     };
 
     /**
@@ -114,7 +106,7 @@
      * @param componentName - The parent component name
      * @param discriminator - The subComponent finding function
      */
-    loader.registerDiscriminator = function (componentName, discriminator) {
+    loader.registerDiscriminator = function(componentName, discriminator) {
         this.discriminators = this.discriminators || {};
         this.discriminators[componentName] = discriminator;
     };
@@ -126,4 +118,4 @@
     ko.components['loaders'].splice(0, 0, loader);
 
     return loader;
-}));
+});
