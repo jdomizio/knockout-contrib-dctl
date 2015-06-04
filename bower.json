@@ -21,7 +21,12 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "js",
+    "src",
+    "GruntFile.js",
+    "package.json",
+    ".gitignore"
   ],
   "devDependencies": {
     "knockoutjs": "~3.3.0"
