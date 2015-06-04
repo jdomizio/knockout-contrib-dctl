@@ -1,15 +1,16 @@
 {
-  "name": "knockout-ctl",
-  "version": "0.0.1",
-  "description": "Component Template Loader for Knockout",
+  "name": "knockout-contrib-dctl",
+  "version": "1.0.0",
+  "description": "Discriminating Component Template Loader for knockoutjs",
   "moduleType": [
-    "amd"
+    "amd",
+    "globals"
   ],
   "authors": [
     "Jason Domizio"
   ],
   "license": "MIT",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",

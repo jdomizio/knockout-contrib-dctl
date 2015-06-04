@@ -1,6 +1,6 @@
 {
-  "name": "knockout-ctl",
-  "version": "0.0.1",
+  "name": "knockout-contrib-dctl",
+  "version": "1.0.0",
   "devDependencies": {
     "bower": "^1.4.1",
     "grunt": "^0.4.5",
