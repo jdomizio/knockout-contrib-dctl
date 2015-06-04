@@ -9,6 +9,11 @@
   "authors": [
     "Jason Domizio"
   ],
+  "homepage": "https://github.com/jdomizio/knockout-contrib-dctl",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jdomizio/knockout-contrib-dctl.git"
+  },
   "license": "MIT",
   "private": false,
   "ignore": [
